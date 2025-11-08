@@ -1,0 +1,38 @@
+{% extends "encabezado.html" %}
+
+{% block contenido %}
+<h1>Bienvenido al sistema de gestión estudiantil</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<h2>Lista de Estudiantes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Grado</th>
+            <th>Promedio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for estudiante in est %}
+        <tr>
+            <td>{{ estudiante.id }} 
+                <a href="{{ url_for('editar', id=estudiante.id) }}">Editar</a>
+                <a href="{{ url_for('eliminar', id=estudiante.id) }}">Eliminar</a>
+            </td>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.grado }}</td>
+            <td>{{ estudiante.promedio }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

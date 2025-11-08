@@ -1,0 +1,29 @@
+{% extends "encabezado.html" %}
+
+{% block contenido %}
+<h1>Editar Estudiante</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<form action="{{ url_for('editar', id=est.id) }}" method="post">
+    <label>Nombre:</label>  
+    <input type="text" name="nombre" value="{{ est.nombre }}"><br>
+    <label>Grado:</label>
+    <select name="grado">
+        <option value="Primero" {% if est.grado == 'Primero' %}selected{% endif %}>Primero</option>
+        <option value="Segundo" {% if est.grado == 'Segundo' %}selected{% endif %}>Segundo</option>
+        <option value="Tercero" {% if est.grado == 'Tercero' %}selected{% endif %}>Tercero</option>
+        <option value="Cuarto" {% if est.grado == 'Cuarto' %}selected{% endif %}>Cuarto</option>
+        <option value="Quinto" {% if est.grado == 'Quinto' %}selected{% endif %}>Quinto</option>
+    </select><br>
+    <label>Promedio:</label>
+    <input type="text" name="promedio" value="{{ est.promedio }}"><br>
+    <input type="submit" value="Actualizar">
+</form>
+{% endblock %}

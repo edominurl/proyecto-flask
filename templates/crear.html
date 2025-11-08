@@ -1,0 +1,42 @@
+{% extends "encabezado.html" %}
+
+{% block contenido %}
+<h1>Bienvenido al sistema de gestión estudiantil</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<h2>Formulario de ingreso</h2>
+<form action="{{ url_for('crear') }}" method="post">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" placeholder="Ingresa tu nombre"><br>
+    <label>Grado:</label>
+    <select name="grado">
+        <option value="Primero">Primero</option>
+        <option value="Segundo">Segundo</option>
+        <option value="Tercero">Tercero</option>
+        <option value="Cuarto">Cuarto</option>
+        <option value="Quinto">Quinto</option>
+    </select><br>
+    <label>Promedio:</label>
+    <select name="promedio">
+        <option value="1.0">1.0</option>
+        <option value="2.0">2.0</option>
+        <option value="3.0">3.0</option>
+        <option value="4.0">4.0</option>
+        <option value="5.0">5.0</option>
+        <option value="6.0">6.0</option>
+        <option value="7.0">7.0</option>
+        <option value="8.0">8.0</option>
+        <option value="9.0">9.0</option>
+        <option value="10.0">10.0</option>
+    </select><br>
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}
